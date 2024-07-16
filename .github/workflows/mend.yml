@@ -1,0 +1,55 @@
+
+# ******** Mend Unified CLI Template for Github Actions ********
+#
+# You may wish to alter this file to override the build tool and Mend scanning technologies.
+#
+# For more configuration options, please check the technical documentation portal:
+# 📚 https://docs.mend.io/bundle/integrations/page/scan_with_the_mend_cli.html
+#
+# ******** Description ********
+# mend dep will automatically use package managers and file system scanning to detect open source components.
+# mend code will automatically detect languages and frameworks used in your projects to scan for code weaknesses.
+
+# If you are NOT using a service user, and have multiple organizations, don't forget to call the scope -s parameter to set the organization
+
+name: Mend CLI Scan
+
+on:
+  workflow_dispatch
+
+env:
+  MEND_EMAIL: ${{secrets.MEND_EMAIL}}
+  MEND_USER_KEY: ${{secrets.MEND_USER_KEY}}
+  MEND_URL: https://saas-eu.mend.io
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+    - uses: actions/checkout@v3
+
+    - name: Build with NPM
+      run: npm i
+
+    - name: Download Mend CLI
+      run: |
+        echo Downloading Mend CLI
+        curl https://downloads.mend.io/cli/linux_amd64/mend -o /usr/local/bin/mend && chmod +x /usr/local/bin/mend
+
+    - name: Mend dependencies scan
+      run: |
+        echo run Mend dependencies scan
+        mend dep -u -s "Luke Brogan Demo - Github.com//GH_juice-shop//GH_juice-shop" --fail-policy
+    - name: Mend code scan
+      run: |
+        echo Run Mend code scan
+        mend code -s "Luke Brogan Demo - Github.com//GH_juice-shop//GH_juice-shop"
+    - name: Mend container scan
+      run: |
+        echo Run Mend image scan
+        mend image bkimminich/juice-shop -s "Luke Brogan Demo - Github.com//GH_juice-shop//GH_juice-shop"
+    - name: Mend IaC scan
+      run: |
+        echo Run Mend IaC scan
+        mend iac
