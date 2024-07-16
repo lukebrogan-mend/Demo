@@ -15,7 +15,7 @@ jobs:
         npm install --ignore-scripts
     - name: Fix everything which can be fixed
       run: 'npm run lint:fix'
-    - uses: stefanzweifel/git-auto-commit-action@v4.0.0
+    - uses: stefanzweifel/git-auto-commit-action@v4.16.0
       with:
         commit_message: "Auto-fix linting issues"
 
