@@ -15,7 +15,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: "Check out Git repository"
-        uses: actions/checkout@v2
+        uses: actions/checkout@v4
       - name: "Use Node.js 14"
         uses: actions/setup-node@v1
         with:
@@ -50,7 +50,7 @@ jobs:
         node-version: [10, 12, 14]
     steps:
       - name: "Check out Git repository"
-        uses: actions/checkout@v2
+        uses: actions/checkout@v4
       - name: "Use Node.js ${{ matrix.node-version }}"
         uses: actions/setup-node@v1
         with:
@@ -98,7 +98,7 @@ jobs:
     runs-on: windows-latest
     steps:
       - name: "Check out Git repository"
-        uses: actions/checkout@v2
+        uses: actions/checkout@v4
       - name: "Use Node.js 14"
         uses: actions/setup-node@v1
         with:
@@ -115,7 +115,7 @@ jobs:
     runs-on: windows-latest
     steps:
       - name: "Check out Git repository"
-        uses: actions/checkout@v2
+        uses: actions/checkout@v4
       - name: "Use Node.js 14"
         uses: actions/setup-node@v1
         with:
@@ -133,7 +133,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: "Check out Git repository"
-        uses: actions/checkout@v2
+        uses: actions/checkout@v4
       - name: "Use Node.js 14"
         uses: actions/setup-node@v1
         with:
@@ -168,7 +168,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: "Check out Git repository"
-        uses: actions/checkout@v2
+        uses: actions/checkout@v4
       - name: "Set up QEMU"
         uses: docker/setup-qemu-action@v1
       - name: "Set up Docker Buildx"
@@ -205,7 +205,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: "Check out Git repository"
-        uses: actions/checkout@v2
+        uses: actions/checkout@v4
       - name: "Set Heroku app & branch for ${{ github.ref }}"
         run: |
           if [ "$GITHUB_REF" == "refs/heads/master" ]; then
